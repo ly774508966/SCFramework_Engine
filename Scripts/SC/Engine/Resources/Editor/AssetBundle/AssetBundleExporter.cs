@@ -214,7 +214,7 @@ namespace SCFramework.Editor
         private static void ProcessAssetBundleRes(AssetDataTable table)
         {
             int abIndex = table.AddAssetBundleName(ProjectPathConfig.AB_MANIFEST_NAME);
-            table.AddAssetData(new AssetData(ABManifestHandler.ABManifestHandlerKey, eResType.kAsset, abIndex));
+            table.AddAssetData(new AssetData(ABManifestHandler.ABManifestHandlerKey, eResType.kABAsset, abIndex));
 
             AssetDatabase.RemoveUnusedAssetBundleNames();
 
@@ -228,7 +228,14 @@ namespace SCFramework.Editor
                     string[] assets = AssetDatabase.GetAssetPathsFromAssetBundle(abNames[i]);
                     foreach (var cell in assets)
                     {
-                        table.AddAssetData(new AssetData(AssetPath2Name(cell), eResType.kAsset, abIndex));
+                        if (cell.EndsWith(".unity"))
+                        {
+                            table.AddAssetData(new AssetData(AssetPath2Name(cell), eResType.kABScene, abIndex));
+                        }
+                        else
+                        {
+                            table.AddAssetData(new AssetData(AssetPath2Name(cell), eResType.kABAsset, abIndex));
+                        }
                     }
                 }
             }

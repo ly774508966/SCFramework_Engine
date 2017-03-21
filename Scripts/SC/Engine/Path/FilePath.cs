@@ -40,7 +40,8 @@ namespace SCFramework
 #elif UNITY_STANDALONE_OSX && !UNITY_EDITOR
                     m_StreamingAssetsPath = Application.streamingAssetsPath + "/";
 #else
-                    m_StreamingAssetsPath = GetParentDir(Application.dataPath, 1) + "/BuildRes/standalone/";
+                    //m_StreamingAssetsPath = GetParentDir(Application.dataPath, 1) + "/BuildRes/standalone/";
+                    m_StreamingAssetsPath = Application.streamingAssetsPath + "/";
 #endif
                 }
 

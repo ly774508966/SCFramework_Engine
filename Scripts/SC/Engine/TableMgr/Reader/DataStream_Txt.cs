@@ -120,7 +120,7 @@ namespace SCFramework
                 string key = m_SchemeNames[i];
                 if (!fieldSourceMap.ContainsKey(key))
                 {
-                    Debug.LogWarning(string.Format("Found a new Field :{0} In {1}",
+                    Log.w(string.Format("Found a new Field :{0} In {1}",
                         key, tableName));
                 }
             }
@@ -139,7 +139,7 @@ namespace SCFramework
                 }
                 if (!findKey)
                 {
-                    Debug.LogError(string.Format("Field :{0}  removed In {1}",
+                    Log.e(string.Format("Field :{0}  removed In {1}",
                         key, tableName));
                 }
             }

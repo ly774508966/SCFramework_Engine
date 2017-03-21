@@ -22,9 +22,10 @@ namespace SCFramework
     public class eResType
     {
         public const short kAssetBundle = 0;
-        public const short kAsset = 1;
-        public const short kInternal = 2;
-        public const short kNetImageRes = 3;
+        public const short kABAsset = 1;
+        public const short kABScene = 2;
+        public const short kInternal = 3;
+        public const short kNetImageRes = 4;
     }
 
     public interface IRes : IRefCounter, ICacheType, IEnumeratorTask

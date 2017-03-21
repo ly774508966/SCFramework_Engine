@@ -69,10 +69,10 @@ namespace SCFramework
         private UIRoot LoadUIRoot()
         {
             ResLoader loader = ResLoader.Allocate(null);
-            loader.Add2Load("Resources/Engine/UI/UIRoot");
+            loader.Add2Load(ProjectPathConfig.UI_ROOT_PATH);
             loader.LoadSync();
 
-            IRes res = ResMgr.S.GetRes("Resources/Engine/UI/UIRoot", false);
+            IRes res = ResMgr.S.GetRes(ProjectPathConfig.UI_ROOT_PATH, false);
             if (res == null || res.asset == null)
             {
                 return null;

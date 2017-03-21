@@ -274,7 +274,7 @@ namespace SCFramework
                 OnAddRow(memberInstance);
                 memberInstance.SetSchemeHeader (m_SchemeHeader);
             }
-            Debug.Log(string.Format("Parse Success {0}", m_SchemeHeader.tableName));
+            Log.i(string.Format("Parse Success {0}", m_SchemeHeader.tableName));
         }
 
         private  void OnAddRow(TDUniversally memberInstance)
@@ -282,7 +282,7 @@ namespace SCFramework
             int key = memberInstance.listData[m_SchemeHeader.GetFieldTypeIndex("Id")];
             if (m_DataCache.ContainsKey(key))
             {
-                Debug.LogError(string.Format("Invaild,  TD{0}Table Id aSCFrameworkeady exists {1}", m_SchemeHeader.tableName, key));
+                Log.e(string.Format("Invaild,  TD{0}Table Id aSCFrameworkeady exists {1}", m_SchemeHeader.tableName, key));
             }
             else
             {
@@ -321,7 +321,7 @@ namespace SCFramework
             }
             else
             {
-                Debug.LogError(string.Format("Can't find key {0} in TD{1}", id, m_SchemeHeader.tableName));
+                Log.e(string.Format("Can't find key {0} in TD{1}", id, m_SchemeHeader.tableName));
                 return null;
             }
         }

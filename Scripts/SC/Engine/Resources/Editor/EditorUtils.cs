@@ -317,7 +317,7 @@ namespace SCFramework.Editor
 
         public static void Abort(string errMsg)
         {
-            Debug.LogError("BatchMode Abort Exit " + errMsg);
+            Log.e("BatchMode Abort Exit " + errMsg);
             System.Threading.Thread.CurrentThread.Abort();
             System.Diagnostics.Process.GetCurrentProcess().Kill();
 

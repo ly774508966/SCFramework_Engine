@@ -53,8 +53,10 @@ namespace SCFramework
             {
                 case eResType.kAssetBundle:
                     return AssetBundleRes.Allocate(name);
-                case eResType.kAsset:
+                case eResType.kABAsset:
                     return AssetRes.Allocate(name);
+                case eResType.kABScene:
+                    return SceneRes.Allocate(name);
                 case eResType.kInternal:
                     return InternalRes.Allocate(name);
                 case eResType.kNetImageRes:

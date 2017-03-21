@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace SCFramework
 {
@@ -23,7 +24,7 @@ namespace SCFramework
         /// 预先读取Language Const表
         /// </summary>
         /// <returns></returns>
-        public IEnumerator PreReadAll()
+        public IEnumerator PreReadAll(Action onLoadFinish)
         {
             TableReadThreadWork readWork = CreateTableReadJobs(TableConfig.preLoadTableArray);
 
@@ -33,10 +34,14 @@ namespace SCFramework
                 yield return 0;
             }
 
+            if (onLoadFinish != null)
+            {
+                onLoadFinish();
+            }
             yield return 0;
         }
 
-        public IEnumerator ReadAll()
+        public IEnumerator ReadAll(Action onLoadFinish)
         {
             m_IsLoading = true;
             TableReadThreadWork readWork = CreateTableReadJobs(TableConfig.delayLoadTableArray);
@@ -47,9 +52,12 @@ namespace SCFramework
                 yield return 0;
             }
 
-            //TDConstTable.InitArrays();
-
             m_IsLoading = false;
+
+            if (onLoadFinish != null)
+            {
+                onLoadFinish();
+            }
             yield return 0;
         }
 

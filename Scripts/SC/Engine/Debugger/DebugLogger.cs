@@ -41,9 +41,9 @@ namespace SCFramework
             }
             if (msg.Length > 0)
             {
-                UnityEngine.Debug.LogWarning("********** BEGIN STACK (堆栈信息给欧阳)**********");
-                UnityEngine.Debug.LogWarning(msg);
-                UnityEngine.Debug.LogWarning("**********  END STACK  (堆栈信息给欧阳)**********");
+                Log.w("********** BEGIN STACK **********");
+                Log.w(msg);
+                Log.w("**********  END STACK **********");
             }
         }
         #endregion

@@ -93,7 +93,7 @@ namespace SCFramework
             #if UNITY_ANDROID && !UNITY_EDITOR
             //m_SdcardPath = AndroidSDKHelper.sdcardAbsPath;
             #endif
-            Debug.Log(m_SdcardPath);
+            Log.i("SDCardPath:" + m_SdcardPath);
             m_Thread = new Thread(Work);
             m_Thread.Start();
         }
@@ -123,10 +123,10 @@ namespace SCFramework
                     {
                     ReadTable(readparm.tableInfo, langData);
                     isReadTxtSuccess = true;
-                    Debug.Log("Read sdcard Language.txt success");
+                    Log.i("Read sdcard Language.txt success");
                     }
                     }
-                    Debug.Log(languageAbsPath);
+                    Log.i(languageAbsPath);
                     }
 */
 #endif
@@ -139,7 +139,7 @@ namespace SCFramework
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError(ex.ToString());
+                    Log.e(ex.ToString());
                     //DataCollection.S.PostError3rdOnlySafe(ex.Message, ex.StackTrace);
                 }
             }
@@ -164,7 +164,7 @@ namespace SCFramework
 
             if (!m_CryptoHelper.RsaVerify(SCFrameworkgFile.FileData, SCFrameworkgFile.RasText))
             {
-                Debug.LogError("RsaVerify Fail");
+                Log.iError("RsaVerify Fail");
             }
             byte[] plainZipText = m_CryptoHelper.DesDecrypt(SCFrameworkgFile.FileData);
             //解压
@@ -196,8 +196,8 @@ namespace SCFramework
                 }
                 catch (System.Exception ex)
                 {
-                    Debug.LogError("Parse table error TD" + tableInfo.fileName);
-                    Debug.LogError(ex.ToString() + ex.StackTrace);
+                    Log.e("Parse table error TD" + tableInfo.fileName);
+                    Log.e(ex.ToString() + ex.StackTrace);
                     //DataCollection.S.PostError3rdOnlySafe(ex.Message, ex.StackTrace);
                 }
             }

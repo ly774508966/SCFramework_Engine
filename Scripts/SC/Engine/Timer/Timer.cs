@@ -64,7 +64,7 @@ namespace SCFramework
             float passTick = (toTime.Ticks - DateTime.Now.Ticks) / 10000000;
             if (passTick < 0)
             {
-                Debug.LogWarning("Timer Set Pass Time...");
+                Log.w("Timer Set Pass Time...");
                 passTick = 0;
             }
             return Post2Really(callback, passTick);

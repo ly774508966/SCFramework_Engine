@@ -8,7 +8,11 @@ namespace SCFramework
     public class ProjectPathConfig
     {
         #region 工程目录
-        public static string APP_CONFIG_PATH = "Resources/Demo/Config/AppConfig";
+        public const string APP_CONFIG_PATH = "Resources/Demo/Config/AppConfig";
+        #endregion
+
+        #region UIRoot
+        public const string UI_ROOT_PATH = "Resources/UI/UIRoot";
         #endregion
 
         #region AssetBundle 相关

@@ -11,7 +11,42 @@ namespace SCFramework
     {
         private ResLoader m_CurrentLoader;
 
-        public bool SwitchSceneSync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
+        public bool LoadBuildInSceneSync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
+        {
+            if (m_CurrentLoader != null)
+            {
+                m_CurrentLoader.ReleaseAllRes();
+                m_CurrentLoader.Recycle2Cache();
+                m_CurrentLoader = null;
+            }
+
+            try
+            {
+                SceneManager.LoadScene(sceneName, mode);
+            }
+            catch (Exception e)
+            {
+                Log.e("SceneManager LoadBuildInSceneSysn Failed! SceneName:" + sceneName);
+                Log.e(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        public void LoadBuildInSceneAsync(string sceneName, Action<string, bool> loadCallback = null, LoadSceneMode mode = LoadSceneMode.Single)
+        {
+            if (m_CurrentLoader != null)
+            {
+                m_CurrentLoader.ReleaseAllRes();
+                m_CurrentLoader.Recycle2Cache();
+                m_CurrentLoader = null;
+            }
+
+            StartCoroutine(LoadSceneAsync(sceneName, loadCallback, mode, false));
+        }
+
+        public bool LoadABSceneFromSync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
         {
             ResLoader nextLoader = ResLoader.Allocate();
 
@@ -38,7 +73,7 @@ namespace SCFramework
             }
             catch (Exception e)
             {
-                Log.e("SceneManager LoadSceneSync Failed! SceneName:" + sceneName);
+                Log.e("SceneManager LoadABSceneFromSync Failed! SceneName:" + sceneName);
                 Log.e(e);
                 UnloadSceneAssetBundle(sceneName);
                 return false;
@@ -48,7 +83,7 @@ namespace SCFramework
             return true;
         }
 
-        public void SwitchSceneAsync(string sceneName, Action<string, bool> loadCallback = null, LoadSceneMode mode = LoadSceneMode.Single)
+        public void LoadABSceneAsync(string sceneName, Action<string, bool> loadCallback = null, LoadSceneMode mode = LoadSceneMode.Single)
         {
             ResLoader nextLoader = ResLoader.Allocate();
 
@@ -73,19 +108,26 @@ namespace SCFramework
 
             m_CurrentLoader.LoadAsync(() =>
             {
-                StartCoroutine(OnSceneResLoadFinish(sceneName, loadCallback, mode));
+                StartCoroutine(LoadSceneAsync(sceneName, loadCallback, mode, true));
             });
         }
 
-        private IEnumerator OnSceneResLoadFinish(string sceneName, Action<string, bool> loadCallback, LoadSceneMode mode)
+        private IEnumerator LoadSceneAsync(string sceneName, Action<string, bool> loadCallback, LoadSceneMode mode, bool abMode)
         {
             AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, mode);
             yield return op;
 
             if (!op.isDone)
             {
-                Log.e("SceneManager LoadSceneAsync Not Done! SceneName:" + sceneName);
-                UnloadSceneAssetBundle(sceneName);
+                if (abMode)
+                {
+                    Log.e("SceneManager LoadABSceneAsync Not Done! SceneName:" + sceneName);
+                    UnloadSceneAssetBundle(sceneName);
+                }
+                else
+                {
+                    Log.e("SceneManager LoadBuindInSceneAsync Not Done! SceneName:" + sceneName);
+                }
 
                 if (loadCallback != null)
                 {
@@ -94,7 +136,10 @@ namespace SCFramework
                 yield break;
             }
 
-            UnloadSceneAssetBundle(sceneName);
+            if (abMode)
+            {
+                UnloadSceneAssetBundle(sceneName);
+            }
 
             if (loadCallback != null)
             {

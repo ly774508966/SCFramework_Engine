@@ -78,11 +78,6 @@ namespace SCFramework
             //TimeDebugger timer = ResMgr.S.timeDebugger;
 
             //timer.Begin("LoadSync Asset:" + m_Name);
-            if (abR.assetBundle.isStreamedSceneAssetBundle)
-            {
-                resState = eResState.kReady;
-                return true;
-            }
 
             HoldDependRes();
 
@@ -143,12 +138,6 @@ namespace SCFramework
                 yield break;
             }
 
-            if (abR.assetBundle.isStreamedSceneAssetBundle)
-            {
-                resState = eResState.kReady;
-                yield break;
-            }
-
             //确保加载过程中依赖资源不被释放:目前只有AssetRes需要处理该情况
             HoldDependRes();
 
@@ -201,7 +190,7 @@ namespace SCFramework
             return m_AssetBundleRequest.progress;
         }
 
-        private void InitAssetBundleName()
+        protected void InitAssetBundleName()
         {
             m_AssetBundleArray = null;
 

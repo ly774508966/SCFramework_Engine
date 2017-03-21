@@ -86,7 +86,7 @@ namespace SCFramework
                     {
                         if (layout2.constraint == GridLayoutGroup.Constraint.Flexible)
                         {
-                            Debug.LogWarning("[LoopScrollRect] Flexible not supported yet");
+                            Log.w("[LoopScrollRect] Flexible not supported yet");
                         }
                         m_ContentConstraintCount = layout2.constraintCount;
                     }

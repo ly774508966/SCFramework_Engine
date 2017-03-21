@@ -78,7 +78,7 @@ namespace SCFramework
                 GridLayoutGroup layout = content.GetComponent<GridLayoutGroup>();
                 if (layout != null && layout.constraint != GridLayoutGroup.Constraint.FixedRowCount)
                 {
-                    Debug.LogError("[Horizontal Mode ListView] unsupported GridLayoutGroup constraint");
+                    Log.e("[Horizontal Mode ListView] unsupported GridLayoutGroup constraint");
                 }
             }
             else
@@ -88,7 +88,7 @@ namespace SCFramework
                 GridLayoutGroup layout = content.GetComponent<GridLayoutGroup>();
                 if (layout != null && layout.constraint != GridLayoutGroup.Constraint.FixedColumnCount)
                 {
-                    Debug.LogError("[Vertical Mode ListView] unsupported GridLayoutGroup constraint");
+                    Log.e("[Vertical Mode ListView] unsupported GridLayoutGroup constraint");
                 }
             }
         }
