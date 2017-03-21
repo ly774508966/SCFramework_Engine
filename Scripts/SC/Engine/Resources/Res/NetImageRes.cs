@@ -29,7 +29,7 @@ namespace SCFramework
         {
             get
             {
-                return PathHelper.persistentDataPath4Photo;
+                return FilePath.persistentDataPath4Photo;
             }
         }
 

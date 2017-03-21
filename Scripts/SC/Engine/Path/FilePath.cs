@@ -6,9 +6,10 @@ namespace SCFramework
 {
     public class FilePath
     {
-        static string m_PersistentDataPath;
-        static string m_StreamingAssetsPath;
-        static string m_PersistentDataPath4Res;
+        private static string           m_PersistentDataPath;
+        private static string           m_StreamingAssetsPath;
+        private static string           m_PersistentDataPath4Res;
+        private static string           m_PersistentDataPath4Photo;
 
         // 外部目录  
         public static string persistentDataPath
@@ -68,6 +69,25 @@ namespace SCFramework
                 }
 
                 return m_PersistentDataPath4Res;
+            }
+        }
+
+        // 外部头像缓存目录
+        public static string persistentDataPath4Photo
+        {
+            get
+            {
+                if (null == m_PersistentDataPath4Photo)
+                {
+                    m_PersistentDataPath4Photo = persistentDataPath + "Photos\\";
+
+                    if (!Directory.Exists(m_PersistentDataPath4Photo))
+                    {
+                        Directory.CreateDirectory(m_PersistentDataPath4Photo);
+                    }
+                }
+
+                return m_PersistentDataPath4Photo;
             }
         }
 
