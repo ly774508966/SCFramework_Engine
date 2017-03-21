@@ -8,7 +8,13 @@ namespace SCFramework
 {
     public class AbstractStartProcess : AbstractMonoModule
     {
-        private ExecuteNodeContainer m_ExecuteContainer;
+        private ExecuteNodeContainer    m_ExecuteContainer;
+        private Action                  m_OnProcessFinish;
+
+        public void SetFinishListener(Action listener)
+        {
+            m_OnProcessFinish = listener;
+        }
 
         public ExecuteNodeContainer executeContainer
         {
@@ -17,6 +23,7 @@ namespace SCFramework
                 return m_ExecuteContainer;
             }
         }
+
         public float totalSchedule
         {
             get
@@ -79,6 +86,12 @@ namespace SCFramework
         {
             Log.i("#BaseStartProcess: OnAllExecuteNodeEnd");
             m_ExecuteContainer.On_ExecuteContainerEndEvent -= OnAllExecuteNodeEnd;
+
+            if (m_OnProcessFinish != null)
+            {
+                m_OnProcessFinish();
+            }
+
             m_ExecuteContainer = null;
             Destroy(gameObject);
         }
