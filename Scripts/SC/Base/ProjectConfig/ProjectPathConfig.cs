@@ -18,17 +18,18 @@ namespace SCFramework
         #region AssetBundle 相关
 
         public const string ABMANIFEST_AB_NAME = "putao";
+        public const string AB_RELATIVE_PATH = "abc/asd/putao/";
         public const string ABMANIFEST_ASSET_NAME = "assetbundlemanifest";
 
         public static string AssetBundleUrl2Name(string url)
         {
-            string parren = FilePath.streamingAssetsPath + ABMANIFEST_AB_NAME + "/";
+            string parren = FilePath.streamingAssetsPath + AB_RELATIVE_PATH;
             return url.Replace(parren, "");
         }
 
         public static string AssetBundleName2Url(string name)
         {
-            string parren = FilePath.streamingAssetsPath + ABMANIFEST_AB_NAME + "/";
+            string parren = FilePath.streamingAssetsPath + AB_RELATIVE_PATH;
             return parren + name;
         }
 
@@ -45,7 +46,7 @@ namespace SCFramework
         };
 
         //导出目录
-        public const string EXPORT_ROOT_FOLDER = "Assets/StreamingAssets/putao/";
+        public const string EXPORT_ROOT_FOLDER = "StreamingAssets/" + AB_RELATIVE_PATH;
 
         public const string EXPORT_ASSETBUNDLE_CONFIG_PATH = "asset_bindle_config.bin";
         #endregion

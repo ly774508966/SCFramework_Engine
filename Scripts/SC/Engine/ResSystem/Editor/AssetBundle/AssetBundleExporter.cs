@@ -112,7 +112,15 @@ namespace SCFramework.Editor
         public static void BuildAllAssetBundles()
         {
             Log.i("Start Build All AssetBundles.");
-            BuildPipeline.BuildAssetBundles(ProjectPathConfig.EXPORT_ROOT_FOLDER, BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.StandaloneWindows);
+
+            string exportPath = Application.dataPath + "/" + ProjectPathConfig.EXPORT_ROOT_FOLDER;
+
+            if (Directory.Exists(exportPath) == false)
+            {
+                Directory.CreateDirectory(exportPath);
+            }
+
+            BuildPipeline.BuildAssetBundles("Assets/" + ProjectPathConfig.EXPORT_ROOT_FOLDER, BuildAssetBundleOptions.ChunkBasedCompression, BuildTarget.StandaloneWindows);
         }
 #endregion
 

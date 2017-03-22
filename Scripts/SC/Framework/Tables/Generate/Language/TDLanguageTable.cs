@@ -22,6 +22,11 @@ namespace SCFramework
         {
             m_DataCache.Clear();
             m_DataList.Clear();
+            if (fileData == null)
+            {
+                return;
+            }
+
             DataStreamReader dataR = new DataStreamReader(fileData);
             int rowCount = dataR.GetRowCount();
             for (int i = 0; i < rowCount; ++i)

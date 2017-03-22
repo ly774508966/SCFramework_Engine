@@ -38,6 +38,11 @@ namespace SCFramework
 
         public DataStreamReader(byte[] data)
         {
+            if (data == null)
+            {
+                return;
+            }
+
             m_TxtReader = new TxtReader();
             m_TxtReader.ParseData(System.Text.UTF8Encoding.UTF8.GetString(data), 0, FIELDNAME_ROW);
             m_SchemeNames = m_TxtReader.GetColName();
