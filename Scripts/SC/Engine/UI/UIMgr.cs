@@ -110,7 +110,7 @@ namespace SCFramework
             {
                 return null;
             }
-            return info.Panel;
+            return info.abstractPanel;
         }
 
         public int FindTopPanel<T>(T[] filter = null) where T : IConvertible
@@ -252,6 +252,39 @@ namespace SCFramework
             ReSortPanel();
         }
 
+        public void SetPanelVisible<T>(T uiID, bool visible) where T : IConvertible
+        {
+            int eID = uiID.ToInt32(null);
+
+            for (int i = m_ActivePanelInfoList.Count - 1; i >= 0; --i)
+            {
+                if (m_ActivePanelInfoList[i].uiID == eID)
+                {
+                    m_ActivePanelInfoList[i].customVisibleFlag = visible;
+                }
+            }
+        }
+
+        public void SetPanelVisible(AbstractPanel panel, bool visible)
+        {
+            if (panel == null)
+            {
+                return;
+            }
+
+            PanelInfo panelInfo = FindPanelInfoByPanelID(panel.panelID);
+            if (panelInfo == null)
+            {
+                return;
+            }
+
+            if (panelInfo.customVisibleFlag != visible)
+            {
+                panelInfo.customVisibleFlag = visible;
+                ReSortPanel();
+            }
+        }
+
         public void ShortCachePanel<T>(T uiID, int cacheCount) where T : IConvertible
         {
             UIData data = UIDataTable.Get(uiID.ToInt32(null));
@@ -297,7 +330,7 @@ namespace SCFramework
                 {
                     m_CachedPanelList.RemoveAt(i);
 
-                    GameObject.Destroy(panelInfo.Panel.gameObject);
+                    GameObject.Destroy(panelInfo.abstractPanel.gameObject);
 
                     ObjectPool<PanelInfo>.S.Recycle(panelInfo);
                 }
@@ -343,7 +376,7 @@ namespace SCFramework
 
                 m_CachedPanelList.RemoveAt(i);
 
-                GameObject.Destroy(panelInfo.Panel.gameObject);
+                GameObject.Destroy(panelInfo.abstractPanel.gameObject);
 
                 ObjectPool<PanelInfo>.S.Recycle(panelInfo);
             }
@@ -412,7 +445,7 @@ namespace SCFramework
             }
 
             PanelInfo panelInfo = FindPanelInfoByPanelID(panelID);
-            if (panelInfo == null || panelInfo.Panel == null)
+            if (panelInfo == null || panelInfo.abstractPanel == null)
             {
                 Log.e("AttachPage Failed To Find Panel:" + panelID);
                 return null;
@@ -439,7 +472,7 @@ namespace SCFramework
                 }
             }
 
-            page.parentPage = panelInfo.Panel;
+            page.parentPage = panelInfo.abstractPanel;
 
             page.uiID = uiID;
 
@@ -739,7 +772,7 @@ namespace SCFramework
                     }
                 }
 
-                mask |= panelInfo.HideMask;
+                mask |= panelInfo.hideMask;
             }
         }
 
@@ -751,10 +784,10 @@ namespace SCFramework
             int sortingOrder = 0;
             for (int i = 0; i < m_ActivePanelInfoList.Count; ++i)
             {
-                if (m_ActivePanelInfoList[i].Panel != null)
+                if (m_ActivePanelInfoList[i].abstractPanel != null)
                 {
                     m_ActivePanelInfoList[i].SetSiblingIndexAndSortingOrder(index++, sortingOrder);
-                    sortingOrder = m_ActivePanelInfoList[i].MaxSortingOrder;
+                    sortingOrder = m_ActivePanelInfoList[i].maxSortingOrder;
                 }
             }
         }

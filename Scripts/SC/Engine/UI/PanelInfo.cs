@@ -110,6 +110,7 @@ namespace SCFramework
             private Vector3             m_DefaultPos;
             private ePanelState         m_PanelState = ePanelState.UnInit;
             private bool                m_CacheFlag = false;
+            private bool                m_CustomVisibleFlag = true;
 
             private ResLoader           m_ResLoader = ResLoader.Allocate();
             private Action<AbstractPanel> m_OpenListeners;
@@ -131,6 +132,7 @@ namespace SCFramework
                 m_SortIndex = -1;
                 m_PanelState = ePanelState.UnInit;
                 m_OpenListeners = null;
+                m_CustomVisibleFlag = true;
 
                 m_ResLoader.ReleaseAllRes();
 
@@ -158,6 +160,22 @@ namespace SCFramework
                 }
             }
             #endregion
+
+            public bool customVisibleFlag
+            {
+                get { return m_CustomVisibleFlag; }
+                set
+                {
+                    if (m_CustomVisibleFlag == value)
+                    {
+                        return;
+                    }
+
+                    m_CustomVisibleFlag = value;
+
+                    UIMgr.S.SetPanelSortingOrderDirty();
+                }
+            }
 
             public int panelID
             {
@@ -220,7 +238,7 @@ namespace SCFramework
                 m_Panel.SetSortingOrderDirty();
             }
 
-            public int MaxSortingOrder
+            public int maxSortingOrder
             {
                 get
                 {
@@ -264,6 +282,8 @@ namespace SCFramework
                 {
                     return;
                 }
+
+                visible = (visible && m_CustomVisibleFlag);
 
                 ePanelState nextState = ePanelState.UnInit;
                 if (visible)
@@ -350,11 +370,11 @@ namespace SCFramework
                 */
             }
 
-            public int HideMask
+            public int hideMask
             {
                 get
                 {
-                    if (m_Panel == null)
+                    if (m_Panel == null || !m_CustomVisibleFlag)
                     {
                         return 0;
                     }
@@ -362,7 +382,7 @@ namespace SCFramework
                     return (int)m_Panel.hideMask;
                 }
             }
-            public AbstractPanel Panel
+            public AbstractPanel abstractPanel
             {
                 get { return m_Panel; }
                 set
@@ -751,7 +771,7 @@ namespace SCFramework
                     }
                 }
 
-                Panel = panel;
+                abstractPanel = panel;
 
                 UIMgr.S.SetPanelSortingOrderDirty();
             }

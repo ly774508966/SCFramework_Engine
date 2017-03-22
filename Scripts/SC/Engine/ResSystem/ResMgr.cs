@@ -27,7 +27,7 @@ namespace SCFramework
 
         public void InitResMgr()
         {
-            string path = Application.dataPath + "/" + ProjectPathConfig.EXPORT_ASSETBUNDLE_CONFIG_PATH;
+            string path = FilePath.streamingAssetsPath + ProjectPathConfig.EXPORT_ASSETBUNDLE_CONFIG_PATH;
 
             AssetDataTable.S.LoadFromFile(path);
             ABManifestHandler.manifest = ABManifestHandler.LoadInstance();

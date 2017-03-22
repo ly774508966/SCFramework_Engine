@@ -124,6 +124,18 @@ namespace SCFramework
                         UIMgr.S.ClosePanel(this);
                     }
                     break;
+                case ViewEvent.Action_HidePanel:
+                    if (m_ParentPage == null)
+                    {
+                        UIMgr.S.SetPanelVisible(this, false);
+                    }
+                    break;
+                case ViewEvent.Action_ShowPanel:
+                    if (m_ParentPage == null)
+                    {
+                        UIMgr.S.SetPanelVisible(this, true);
+                    }
+                    break;
                 default:
                     base.OnViewEvent(e, args);
                     break;

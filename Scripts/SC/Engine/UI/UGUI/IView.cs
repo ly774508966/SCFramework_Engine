@@ -10,6 +10,8 @@ namespace SCFramework
     {
         MIN = 0,
         Action_ClosePanel,
+        Action_HidePanel,
+        Action_ShowPanel,
         OnPanelOpen,
         OnPanelClose,
         DumpTest,

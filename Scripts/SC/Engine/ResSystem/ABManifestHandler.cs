@@ -8,8 +8,6 @@ namespace SCFramework
 {
     public class ABManifestHandler
     {
-        public const string ABManifestHandlerKey = "assetbundlemanifest";
-
         private static AssetBundleManifest m_Manifest;
 
         public static AssetBundleManifest manifest
@@ -30,7 +28,7 @@ namespace SCFramework
         {
             ResLoader loader = ResLoader.Allocate();
 
-            AssetBundleManifest manifest = loader.LoadSync(ABManifestHandlerKey) as AssetBundleManifest;
+            AssetBundleManifest manifest = loader.LoadSync(ProjectPathConfig.ABMANIFEST_ASSET_NAME) as AssetBundleManifest;
 
             loader.UnloadImage(false);
 

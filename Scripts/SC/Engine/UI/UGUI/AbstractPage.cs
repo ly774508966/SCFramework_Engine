@@ -121,6 +121,16 @@ namespace SCFramework
             SendViewEvent(ViewEvent.Action_ClosePanel);
         }
 
+        public void HideSelfPanel()
+        {
+            SendViewEvent(ViewEvent.Action_HidePanel);
+        }
+
+        public void ShowSelfPanel()
+        {
+            SendViewEvent(ViewEvent.Action_ShowPanel);
+        }
+
         //Only Can Find Attach singleton page
         public AbstractPage GetPage<T>(T uiID) where T : IConvertible
         {

@@ -202,7 +202,7 @@ namespace SCFramework.Editor
 
             ProcessAssetBundleRes(table);
 
-            string filePath = Application.dataPath + "/" + ProjectPathConfig.EXPORT_ASSETBUNDLE_CONFIG_PATH;
+            string filePath = FilePath.streamingAssetsPath + ProjectPathConfig.EXPORT_ASSETBUNDLE_CONFIG_PATH;
             table.Save(filePath);
         }
 
@@ -213,8 +213,8 @@ namespace SCFramework.Editor
 
         private static void ProcessAssetBundleRes(AssetDataTable table)
         {
-            int abIndex = table.AddAssetBundleName(ProjectPathConfig.AB_MANIFEST_NAME);
-            table.AddAssetData(new AssetData(ABManifestHandler.ABManifestHandlerKey, eResType.kABAsset, abIndex));
+            int abIndex = table.AddAssetBundleName(ProjectPathConfig.ABMANIFEST_AB_NAME);
+            table.AddAssetData(new AssetData(ProjectPathConfig.ABMANIFEST_ASSET_NAME, eResType.kABAsset, abIndex));
 
             AssetDatabase.RemoveUnusedAssetBundleNames();
 
