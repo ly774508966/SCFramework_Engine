@@ -164,8 +164,8 @@ namespace SCFramework
         {
             while (m_WaitLoadList.Count > 0)
             {
-                --m_LoadingCount;
                 IRes first = m_WaitLoadList.First.Value;
+                --m_LoadingCount;
                 m_WaitLoadList.RemoveFirst();
 
                 if (first == null)
@@ -173,9 +173,10 @@ namespace SCFramework
                     return;
                 }
 
-                first.LoadSync();
-
-                first.AcceptLoaderStrategySync(this, m_Strategy);
+                if (first.LoadSync())
+                {
+                    first.AcceptLoaderStrategySync(this, m_Strategy);
+                }
             }
 
             m_Strategy.OnAllTaskFinish(this);
