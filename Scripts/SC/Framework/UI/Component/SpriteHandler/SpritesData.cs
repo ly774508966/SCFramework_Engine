@@ -48,7 +48,10 @@ namespace SCFramework
                 m_SpritesMap.Clear();
             }
 
-            m_SpriteList.Clear();
+            if (m_SpriteList != null)
+            {
+                m_SpriteList.Clear();
+            }
         }
 
         private void BuildMap()
