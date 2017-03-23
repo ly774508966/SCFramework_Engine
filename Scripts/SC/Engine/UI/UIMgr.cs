@@ -278,11 +278,7 @@ namespace SCFramework
                 return;
             }
 
-            if (panelInfo.customVisibleFlag != visible)
-            {
-                panelInfo.customVisibleFlag = visible;
-                ReSortPanel();
-            }
+            panelInfo.customVisibleFlag = visible;
         }
 
         public void ShortCachePanel<T>(T uiID, int cacheCount) where T : IConvertible

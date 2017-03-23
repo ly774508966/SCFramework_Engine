@@ -28,9 +28,10 @@ namespace SCFramework
         public static List<string> PrepareDynamicResource()
         public static string PrepareDynamicResource()
         */
-
         [SerializeField]
         private PanelHideMask   m_HideMask = PanelHideMask.None;
+        [SerializeField]
+        private bool            m_CustomVisibleFlag = true;
         [SerializeField]
         private int             m_SortingOrder = -1;
         private bool            m_HasStart = false;
@@ -58,6 +59,26 @@ namespace SCFramework
 
                 if (m_ParentPage == null)
                 {
+                    UIMgr.S.SetPanelSortingOrderDirty();
+                }
+            }
+        }
+
+        public bool customVisibleFlag
+        {
+            get { return m_CustomVisibleFlag; }
+            set
+            {
+                if (m_CustomVisibleFlag == value)
+                {
+                    return;
+                }
+
+                m_CustomVisibleFlag = value;
+
+                if (m_ParentPage == null)
+                {
+                    UIMgr.S.SetPanelVisible(this, m_CustomVisibleFlag);
                     UIMgr.S.SetPanelSortingOrderDirty();
                 }
             }
@@ -127,13 +148,13 @@ namespace SCFramework
                 case ViewEvent.Action_HidePanel:
                     if (m_ParentPage == null)
                     {
-                        UIMgr.S.SetPanelVisible(this, false);
+                        customVisibleFlag = false;
                     }
                     break;
                 case ViewEvent.Action_ShowPanel:
                     if (m_ParentPage == null)
                     {
-                        UIMgr.S.SetPanelVisible(this, true);
+                        customVisibleFlag = true;
                     }
                     break;
                 default:
@@ -209,6 +230,7 @@ namespace SCFramework
             //真正的面板才能生效
             if (m_ParentPage == null)
             {
+                UIMgr.S.SetPanelVisible(this, m_CustomVisibleFlag);
                 UIMgr.S.SetPanelSortingOrderDirty();
             }
         }

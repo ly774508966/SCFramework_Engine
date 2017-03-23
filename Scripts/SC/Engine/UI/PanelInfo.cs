@@ -166,14 +166,12 @@ namespace SCFramework
                 get { return m_CustomVisibleFlag; }
                 set
                 {
-                    if (m_CustomVisibleFlag == value)
-                    {
-                        return;
-                    }
-
                     m_CustomVisibleFlag = value;
 
-                    UIMgr.S.SetPanelSortingOrderDirty();
+                    if (m_Panel != null)
+                    {
+                        m_Panel.customVisibleFlag = value;
+                    }
                 }
             }
 
@@ -283,7 +281,7 @@ namespace SCFramework
                     return;
                 }
 
-                visible = (visible && m_CustomVisibleFlag);
+                visible = (visible && m_Panel.customVisibleFlag);
 
                 ePanelState nextState = ePanelState.UnInit;
                 if (visible)
@@ -382,6 +380,7 @@ namespace SCFramework
                     return (int)m_Panel.hideMask;
                 }
             }
+
             public AbstractPanel abstractPanel
             {
                 get { return m_Panel; }
@@ -760,6 +759,8 @@ namespace SCFramework
                     //需要删除PanelInfo From Activity.
                     return;
                 }
+
+                panel.customVisibleFlag = m_CustomVisibleFlag;
 
                 UIData panelData = UIDataTable.Get(m_UIID);
 
