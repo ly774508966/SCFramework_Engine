@@ -101,6 +101,11 @@ namespace SCFramework
             return loader;
         }
 
+        public ResLoader()
+        {
+            SetStrategy(s_DefaultStrategy);
+        }
+
         public void Add2Load(List<string> list)
         {
             if (list == null)
