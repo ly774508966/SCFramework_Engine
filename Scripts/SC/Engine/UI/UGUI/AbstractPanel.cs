@@ -115,8 +115,9 @@ namespace SCFramework
         public void OnPanelOpen(bool firstOpen, params object[] args)
         {
             m_LastOpenFrame = Time.frameCount;
-            OnPanelOpen(args);
             SendViewEvent(ViewEvent.OnPanelOpen);
+            ERunner.Run(OnPanelOpen, args);
+            SendViewEvent(ViewEvent.OnParamUpdate);
         }
 
         public void OnPanelClose(bool destroy)

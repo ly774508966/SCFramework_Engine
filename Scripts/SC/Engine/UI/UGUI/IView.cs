@@ -14,6 +14,7 @@ namespace SCFramework
         Action_ShowPanel,
         OnPanelOpen,
         OnPanelClose,
+        OnParamUpdate,
         DumpTest,
     }
 

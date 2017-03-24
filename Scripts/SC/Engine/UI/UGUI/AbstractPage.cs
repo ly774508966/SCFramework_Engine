@@ -204,6 +204,9 @@ namespace SCFramework
                 case ViewEvent.OnPanelOpen:
                     OpenPage();
                     break;
+                case ViewEvent.OnParamUpdate:
+                    ERunner.Run(OnParamUpdate);
+                    break;
                 default:
                     break;
             }
@@ -284,6 +287,11 @@ namespace SCFramework
 
         //面板被关闭的时候进入
         protected virtual void OnClose()
+        {
+
+        }
+
+        protected virtual void OnParamUpdate()
         {
 
         }
