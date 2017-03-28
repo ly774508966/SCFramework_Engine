@@ -14,7 +14,7 @@ namespace SCFramework
         private string m_Key;
         private string m_Value;
       
-      private Dictionary<string, TDUniversally.FieldData> m_DataCacheNoGenerate = new Dictionary<string, TDUniversally.FieldData>();
+      //private Dictionary<string, TDUniversally.FieldData> m_DataCacheNoGenerate = new Dictionary<string, TDUniversally.FieldData>();
       
         /// <summary>
         /// 序号
@@ -57,7 +57,7 @@ namespace SCFramework
 
                   break;
                 default:
-                  TableHelper.CacheNewField(dataR, schemeNames[col], m_DataCacheNoGenerate);
+                  //TableHelper.CacheNewField(dataR, schemeNames[col], m_DataCacheNoGenerate);
                   break;
             }
           }
@@ -66,10 +66,12 @@ namespace SCFramework
         
         public DataStreamReader.FieldType GetFieldTypeInNew(string fieldName)
         {
+            /*
             if (m_DataCacheNoGenerate.ContainsKey(fieldName))
             {
                 return m_DataCacheNoGenerate[fieldName].fieldType;
             }
+            */
             return DataStreamReader.FieldType.Unkown;
         }
         

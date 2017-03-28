@@ -25,7 +25,7 @@ namespace SCFramework
             tableName = tName;
         }
     }
-
+    /*
     public class TDUniversallySchemeHeader
     {
         public Dictionary<string, int>         fieldTypeIndex = new Dictionary<string, int>();
@@ -326,4 +326,5 @@ namespace SCFramework
             }
         }
     }
+    */
 }

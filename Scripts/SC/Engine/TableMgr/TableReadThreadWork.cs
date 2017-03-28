@@ -75,8 +75,8 @@ namespace SCFramework
         {
             if (onParse == null)
             {
-                TDUniversallyTable tdTable = new TDUniversallyTable(tableName);
-                onParse = tdTable.Parse;
+                //TDUniversallyTable tdTable = new TDUniversallyTable(tableName);
+                //onParse = tdTable.Parse;
             }
             var readParam = CreateReadParams (onParse ,tableName);
             m_RequestFilePathQueue.Enqueue(readParam);
