@@ -93,7 +93,7 @@ namespace SCFramework
             }
 
             m_ExecuteContainer = null;
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 }
