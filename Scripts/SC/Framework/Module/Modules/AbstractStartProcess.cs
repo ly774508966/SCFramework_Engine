@@ -93,7 +93,8 @@ namespace SCFramework
             }
 
             m_ExecuteContainer = null;
-            Destroy(this);
+
+            actor.RemoveCom(this);
         }
     }
 }
